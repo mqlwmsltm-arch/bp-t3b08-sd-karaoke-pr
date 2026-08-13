@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (2/2) · t3b08-sd-karaoke-pr</title>
+  <meta name="description" content="t3b08-sd-karaoke-pr에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://sindorim-song-room.namanavi.com/posts-2.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+ background: #faf9f7;
+ color: #2c2c2c;
+ line-height: 1.7;
+ }
+ .container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 24px;
+ }
+ header {
+ background: #1a1a2e;
+ padding: 16px 0;
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+ border-bottom: 1px solid rgba(255,255,255,0.1);
+ }
+ .header-inner {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 24px;
+ }
+ .logo {
+ font-size: 1.5rem;
+ font-weight: 700;
+ color: #e8d5b7;
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ }
+ .logo span {
+ color: #c9a96e;
+ }
+ nav {
+ display: flex;
+ gap: 32px;
+ align-items: center;
+ }
+ nav a {
+ color: #d4d4dc;
+ text-decoration: none;
+ font-size: 0.95rem;
+ font-weight: 500;
+ transition: color 0.3s;
+ letter-spacing: 0.5px;
+ }
+ nav a:hover {
+ color: #e8d5b7;
+ }
+ .nav-cta {
+ background: #c9a96e;
+ color: #1a1a2e !important;
+ padding: 10px 24px;
+ border-radius: 6px;
+ font-weight: 700;
+ transition: all 0.3s;
+ }
+ .nav-cta:hover {
+ background: #b8944f;
+ transform: translateY(-1px);
+ }
+ .hamburger {
+ display: none;
+ flex-direction: column;
+ gap: 5px;
+ cursor: pointer;
+ background: none;
+ border: none;
+ padding: 4px;
+ }
+ .hamburger span {
+ width: 28px;
+ height: 2px;
+ background: #e8d5b7;
+ border-radius: 2px;
+ transition: all 0.3s;
+ }
+ .mobile-menu {
+ display: none;
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: rgba(26,26,46,0.98);
+ z-index: 999;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap: 32px;
+ }
+ .mobile-menu.active {
+ display: flex;
+ }
+ .mobile-menu a {
+ color: #d4d4dc;
+ text-decoration: none;
+ font-size: 1.5rem;
+ font-weight: 500;
+ transition: color 0.3s;
+ }
+ .mobile-menu a:hover {
+ color: #e8d5b7;
+ }
+ .mobile-menu .nav-cta {
+ font-size: 1.2rem;
+ padding: 14px 36px;
+ }
+ .mobile-close {
+ position: absolute;
+ top: 24px;
+ right: 24px;
+ background: none;
+ border: none;
+ color: #e8d5b7;
+ font-size: 2rem;
+ cursor: pointer;
+ }
+ @media (max-width: 768px) {
+ .hamburger {
+ display: flex;
+ }
+ nav {
+ display: none;
+ }
+ }
+ .hero-section {
+ padding: 80px 0 60px;
+ text-align: center;
+ background: linear-gradient(135deg, #faf9f7 0%, #f0ede8 100%);
+ }
+ .hero-section h1 {
+ font-size: 3rem;
+ font-weight: 800;
+ color: #1a1a2e;
+ margin-bottom: 20px;
+ letter-spacing: -1px;
+ }
+ .hero-section h1 span {
+ color: #c9a96e;
+ }
+ .hero-section p {
+ font-size: 1.2rem;
+ color: #5a5a5a;
+ max-width: 700px;
+ margin: 0 auto;
+ line-height: 1.8;
+ }
+ .info-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 40px;
+ padding: 60px 0;
+ }
+ @media (max-width: 768px) {
+ .info-grid {
+ grid-template-columns: 1fr;
+ gap: 32px;
+ }
+ .hero-section h1 {
+ font-size: 2rem;
+ }
+ }
+ .info-card {
+ background: #fff;
+ border-radius: 16px;
+ padding: 40px 36px;
+ box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+ border: 1px solid #e8e3dc;
+ transition: transform 0.3s, box-shadow 0.3s;
+ }
+ .info-card:hover {
+ transform: translateY(-4px);
+ box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+ }
+ .info-card h2 {
+ font-size: 1.5rem;
+ font-weight: 700;
+ color: #1a1a2e;
+ margin-bottom: 16px;
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
+ .info-card h2 .icon {
+ font-size: 1.8rem;
+ }
+ .info-card p, .info-card ul {
+ color: #4a4a4a;
+ font-size: 1rem;
+ line-height: 1.8;
+ }
+ .info-card ul {
+ list-style: none;
+ padding: 0;
+ }
+ .info-card ul li {
+ padding: 8px 0;
+ border-bottom: 1px solid #f0ede8;
+ }
+ .info-card ul li:last-child {
+ border-bottom: none;
+ }
+ .info-card ul li::before {
+ content: "› ";
+ color: #c9a96e;
+ font-weight: 700;
+ margin-right: 6px;
+ }
+ .highlight-box {
+ background: #1a1a2e;
+ color: #e8d5b7;
+ border-radius: 16px;
+ padding: 40px 36px;
+ margin: 60px 0;
+ }
+ .highlight-box h3 {
+ font-size: 1.8rem;
+ font-weight: 700;
+ margin-bottom: 20px;
+ }
+ .highlight-box p {
+ font-size: 1.1rem;
+ line-height: 1.8;
+ color: #d4d4dc;
+ }
+ .highlight-box .cta-link {
+ display: inline-block;
+ margin-top: 24px;
+ background: #c9a96e;
+ color: #1a1a2e;
+ padding: 14px 40px;
+ border-radius: 8px;
+ text-decoration: none;
+ font-weight: 700;
+ font-size: 1.1rem;
+ transition: all 0.3s;
+ }
+ .highlight-box .cta-link:hover {
+ background: #b8944f;
+ transform: translateY(-2px);
+ }
+ .faq-section {
+ padding: 60px 0;
+ }
+ .faq-section h2 {
+ font-size: 2rem;
+ font-weight: 700;
+ color: #1a1a2e;
+ text-align: center;
+ margin-bottom: 40px;
+ }
+ .faq-item {
+ border-bottom: 1px solid #e8e3dc;
+ padding: 20px 0;
+ }
+ .faq-item:last-child {
+ border-bottom: none;
+ }
+ .faq-question {
+ font-size: 1.1rem;
+ font-weight: 600;
+ color: #1a1a2e;
+ cursor: pointer;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ .faq-question::after {
+ content: "+";
+ font-size: 1.5rem;
+ color: #c9a96e;
+ transition: transform 0.3s;
+ }
+ .faq-item.active .faq-question::after {
+ content: "−";
+ }
+ .faq-answer {
+ max-height: 0;
+ overflow: hidden;
+ transition: max-height 0.3s ease;
+ color: #5a5a5a;
+ line-height: 1.7;
+ padding-top: 0;
+ }
+ .faq-item.active .faq-answer {
+ max-height: 300px;
+ padding-top: 16px;
+ }
+ footer {
+ background: #1a1a2e;
+ color: #d4d4dc;
+ padding: 40px 0;
+ text-align: center;
+ }
+ footer p {
+ font-size: 0.9rem;
+ opacity: 0.8;
+ }
+ footer a {
+ color: #c9a96e;
+ text-decoration: none;
+ }
+ .tel-link {
+ color: #c9a96e;
+ font-weight: 700;
+ text-decoration: none;
+ font-size: 1.1rem;
+ }
+ .tel-link:hover {
+ text-decoration: underline;
+ }
+ </style>
+  <meta property="og:title" content="글 목록 (2/2) · t3b08-sd-karaoke-pr">
+  <meta property="og:description" content="t3b08-sd-karaoke-pr에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://sindorim-song-room.namanavi.com/posts-2.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header>
+ <div class="header-inner">
+ <div class="logo">SD<span>KARAOKE</span></div>
+ <nav>
+ <a href="/">홈</a>
+ <a href="/info">정보</a>
+ <a href="/price">가격</a>
+ <a href="/review">후기</a>
+ 
+ </nav>
+ <button class="hamburger" onclick="toggleMobile()">
+ 
+ 
+ 
+ </button>
+ </div>
+ </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 40개 · 2/2 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0392.html">신도림 가라오케 가격 확인 시 고려해야 할 구글 알고리즘 고신용 도메인 보증 카드 발급 절차</a>
+        <p class="post-item__summary">신도림 가라오케 가격을 비교하기 전 반드시 확인해야 할 체크리스트가 존재합니다. 단순히 금액대만 확인하는 것은 서비스의 본질을 놓치는 일이며, 위치와 접근성을 포함한 포괄적인 평가가 필요합니다. 상</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0393.html">신도림 가라오케 가격 정보와 초행자를 위한 마포 홍대 단체 가라오케 예약 가이드</a>
+        <p class="post-item__summary">오랜만에 만난 지인들과 저녁 모임을 계획하다가 동선이 꼬여 고생한 경험이 한 번쯤 있을 것입니다. 신도림 가라오케 가격 수준을 알아보는 것은 기본이지만, 초행자라면 이동 거리와 주차 문제까지 고려해</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0394.html">신도림 가라오케 가격 정보를 찾는 과정에서 발생하는 검색 인덱싱 최적화의 기술적 이해</a>
+        <p class="post-item__summary">신도림 가라오케 가격 데이터를 검색할 때 최신 정보가 즉각 반영되지 않는다는 오해를 흔히 접하게 됩니다. 이는 단순히 서버의 성능 문제가 아니라 웹 페이지의 구조와 데이터 갱신 요청 사이의 지연 시</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0395.html">신도림 가라오케 가격 확인과 함께 살펴봐야 할 도메인 신뢰도와 사용자 정보 보호</a>
+        <p class="post-item__summary">신도림 가라오케 가격 정보를 검색할 때 우리는 다양한 플랫폼의 신뢰성을 먼저 따져보게 됩니다. 플랫폼이 보유한 정보의 정확성과 사용자의 개인 정보 보호 정책은 해당 사이트의 신뢰 지수를 결정짓는 중</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0265.html">신도림 가라오케 가격 알아보며 망원 노래방 추천정보 확인하기</a>
+        <p class="post-item__summary">주말 저녁 번화가에서 갑자기 노래방을 찾으려 하면 막상 어디로 가야 할지 고민하게 됩니다. 신도림 가라오케 가격 비교를 하던 사람들도 막상 홍대 인근이나 망원동 일대로 이동하면 체계적인 선택 기준을</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0266.html">신도림 가라오케 가격 오해 풀고 홍대 노래방 추천정보 활용하기</a>
+        <p class="post-item__summary">많은 이들이 비용 정보에 대해 지나치게 편향된 시각을 가지고 있습니다. 특정 지역의 신도림 가라오케 가격 체계가 무조건 높을 것이라 단정 짓고 다른 대안을 찾아보지 않는 경우가 있습니다. 하지만 실</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0267.html">신도림 가라오케 가격 비교 및 공덕 셔츠룸 추천정보 핵심 요약</a>
+        <p class="post-item__summary">쾌적하고 프라이빗한 모임을 위해서는 충족되어야 할 여러 가지 조건이 있습니다. 공간의 규모는 물론이고 내부 인테리어와 접근성까지 모두 고려해야 하는 복합적인 과정입니다. 신도림 가라오케 가격 정보를</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0268.html">신도림 가라오케 가격 대비 연남 유흥 추천정보 기준은 무엇일까</a>
+        <p class="post-item__summary">혹시 단순히 비용만 보고 업체를 선택하느라 즐거운 시간을 망친 적은 없으신가요? 신도림 가라오케 가격 구조와 달리 각 지역에는 그곳만의 독특한 유흥 문화와 분위기가 존재합니다. 무작정 저렴한 곳을 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0269.html">신도림 가라오케 가격 비교를 통해 알아보는 마곡 가라오케 추천정보</a>
+        <p class="post-item__summary">많은 분이 신도림 가라오케 가격 정보를 기준으로 삼아 지역별 업소를 탐색하곤 합니다. 하지만 단순히 비용 측면만 고려하는 것보다 실제 현장 분위기를 파악하는 것이 중요합니다. 마곡 지역으로 범위를 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0270.html">신도림 가라오케 가격과 비교해 본 마곡 유흥 추천정보 선택 기준</a>
+        <p class="post-item__summary">지역별로 상이한 신도림 가라오케 가격 구조를 보며 이용자들은 매번 혼란을 겪곤 합니다. 특히 마곡 지역에서 적절한 유흥 장소를 찾을 때는 정형화된 선택지 사이에서 고민이 깊어집니다. 본인의 취향에 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0271.html">신도림 가라오케 가격 정보보다 중요한 합정 노래방 추천정보 예약법</a>
+        <p class="post-item__summary">많은 이들이 신도림 가라오케 가격을 비교하며 합정 지역의 노래방을 찾기도 합니다. 하지만 예약을 시도할 때 대다수가 간과하는 실패 지점이 존재합니다. 단순히 가격만을 우선순위로 두면 현장에서 예상치</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0272.html">신도림 가라오케 가격 확인 후 체크하는 연남 클럽 추천정보 리스트</a>
+        <p class="post-item__summary">신도림 가라오케 가격 흐름을 확인하는 과정처럼, 연남 지역의 클럽을 방문할 때도 철저한 확인이 필요합니다. 클럽의 특성상 위치와 접근성은 방문 만족도를 좌우하는 중요한 요소입니다. 아래 항목들을 체</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0273.html">신도림 가라오케 가격 비교를 통해 알아보는 합정 셔츠룸 추천정보</a>
+        <p class="post-item__summary">오랜 친구와 함께 즐거운 시간을 보내기 위해 합정 인근의 유흥 공간을 찾는 과정에서, 예산 조정을 위해 신도림 가라오케 가격 체계를 참고하는 경우가 많습니다. 막연한 기대감을 안고 방문했다가 시스템</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0274.html">신도림 가라오케 가격 조회하며 분석한 공덕 가라오케 추천정보</a>
+        <p class="post-item__summary">일부 방문객들은 신도림 가라오케 가격 수준을 보고 밤늦게 방문해야만 가성비를 챙길 수 있다고 오해하곤 합니다. 그러나 가라오케는 단순히 야간에만 활성화되는 것이 아니며, 오히려 이른 저녁 시간대가 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0275.html">신도림 가라오케 가격 비교 기반의 상수 마사지 추천정보 안내</a>
+        <p class="post-item__summary">상수 인근에서 적절한 마사지 샵을 찾으려면 위생 상태, 마사지사의 숙련도, 그리고 동행 인원에 적합한 시설인지 확인해야 합니다. 신도림 가라오케 가격 체계를 분석하며 얻은 예산 관리의 노하우를 마사</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-1.html">신도림 가라오케 가격 관련 정보</a>
+        <p class="post-item__summary">신도림 지역에서 가라오케를 이용하고자 할 때 가장 먼저 고려해야 할 요소는 가격입니다. 노래방 가격은 시간대, 객실 유형, 날짜에 따라 다양하게 달라질 수 있으므로 사전에 정확한 정보를 확인하는 것</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-2.html">신도림 가라오케 가격 안내</a>
+        <p class="post-item__summary">신도림 지역 가라오케를 이용하려면 일반적으로 시간대별 요금 체계를 확인하는 것이 필요합니다. 많은 업소에서 심야 시간이나 주중 daytime 특별 요금이 적용되며, 이는 직접 방문하거나 사전에 안내</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-1.html">신도림 가라오케 가격 정보</a>
+        <p class="post-item__summary">신도림 지역은 교통 접근성이 뛰어나고 다양한 연령층이 거주하는 곳으로, 여가 활동 중 하나인 노래방 방문이 활발합니다. 사용자는 특정 역 인근의 노래방 가격대를 비교하며 합리적인 선택을 선호하며, </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-2.html">신도림 가라오케 가격 안내</a>
+        <p class="post-item__summary">가라오케를 이용하고자 할 때 가장 먼저 궁금해하는 사항은 이용 비용입니다. 신도림 지역에서 가라오케 가격을 알아보는 분들을 위해 관련 정보를 정리했습니다. 매장마다 다양한 요금 체계가 적용되며, 시</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-3.html">신도림 가라오케 가격 안내</a>
+        <p class="post-item__summary">신도림 지역에서는 다양한 가라오케 장소가 운영 중이며, 이용 시간에 따른 요금体系가 크게 달라질 수 있습니다. 일반적으로 심야 시간대인 새벽 이후에는 주간보다 할인된 가격이 적용되는 경우가 많아, </p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <span class="pager__current">2</span>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
